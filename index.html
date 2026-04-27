@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Home Suit Home - Investigation Agency</title>
-    <!-- 1920년대 빈티지 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -41,14 +40,11 @@
     </style>
 </head>
 <body class="text-[#2a221b]">
-    <!-- 메인 컨테이너 -->
     <div class="w-full h-[100dvh] flex flex-col bg-[#d2c1a8] relative overflow-hidden">
-        <!-- 배경 레이어 -->
         <div class="absolute inset-0 map-texture opacity-30"></div>
         <div class="absolute inset-0 paper-texture"></div>
 
-        <!-- 헤더 -->
-        <header class="relative z-10 px-6 py-4 border-b border-[#3a2d24]/20 bg-[#e8dcc4]/80 backdrop-blur-md flex justify-between items-center">
+        <header class="relative z-10 px-6 py-4 border-b border-[#3a2d24]/20 bg-[#e8dcc4]/80 backdrop-blur-md flex justify-between items-center shadow-sm">
             <div class="flex items-center gap-3">
                 <div class="w-2.5 h-2.5 bg-[#8b0000] rounded-full animate-pulse shadow-[0_0_8px_#8b0000]"></div>
                 <h1 class="text-lg md:text-xl font-black uppercase tracking-[0.2em] text-[#3a2d24]">Home Suit Home</h1>
@@ -56,7 +52,6 @@
             <div class="text-[10px] font-bold text-[#3a2d24]/50">EST. 1924</div>
         </header>
 
-        <!-- 채팅 영역 -->
         <main id="chat-container" class="relative z-0 flex-1 overflow-y-auto p-4 md:p-10 space-y-6 scrollbar-vintage">
             <div class="animate-fade-in">
                 <div class="relative flex flex-col p-6 border-b border-[#3a2d24]/10 bg-white/5">
@@ -66,17 +61,18 @@
             </div>
         </main>
 
-        <!-- 타이핑 인디케이터 -->
-        <div id="typing-indicator" class="hidden px-8 py-2 italic text-sm text-[#3a2d24]/50 animate-pulse items-center gap-2 relative z-10 bg-[#e8dcc4]/50">
-            <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            조수가 기록을 뒤적이는 중...
+        <div id="typing-indicator" class="hidden px-8 py-3 italic text-sm text-[#3a2d24]/60 animate-pulse items-center gap-3 relative z-10 bg-[#e8dcc4]/70 backdrop-blur-sm">
+            <svg class="animate-spin h-4 w-4 text-[#8b0000]" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>조수가 기록 보관함을 뒤적이는 중...</span>
         </div>
 
-        <!-- 입력창 -->
-        <footer class="relative z-10 p-4 md:p-6 bg-[#b5a285]/30 border-t border-[#3a2d24]/15">
+        <footer class="relative z-10 p-4 md:p-6 bg-[#b5a285]/40 border-t border-[#3a2d24]/20 shadow-inner">
             <div class="max-w-4xl mx-auto flex items-center gap-2 md:gap-4 bg-[#e8dcc4] border-2 border-[#3a2d24] p-1 shadow-[4px_4px_0px_#3a2d24] transition-all focus-within:shadow-[6px_6px_0px_#3a2d24]">
                 <input type="text" id="user-input" placeholder="사건 단서를 입력하십시오..." class="flex-1 bg-transparent p-2 md:p-3 outline-none text-base md:text-lg text-[#2a221b]" autocomplete="off">
-                <button id="send-btn" class="bg-[#3a2d24] text-[#e8dcc4] px-4 md:px-6 py-2 md:py-3 font-bold uppercase hover:bg-[#1a1410] transition-colors">Transmit</button>
+                <button id="send-btn" class="bg-[#3a2d24] text-[#e8dcc4] px-4 md:px-6 py-2 md:py-3 font-bold uppercase hover:bg-[#1a1410] transition-colors active:translate-y-0.5">Transmit</button>
             </div>
         </footer>
     </div>
@@ -87,17 +83,23 @@
         const sendBtn = document.getElementById('send-btn');
         const typingIndicator = document.getElementById('typing-indicator');
 
+        // 메시지 생성 함수 (안전한 방식)
         function createMsg(role, text) {
             const isUser = role === 'user';
             const div = document.createElement('div');
             div.className = 'animate-fade-in';
+            
+            const bgColor = isUser ? 'bg-[#3a2d24]/5 italic' : 'bg-transparent';
+            const dotColor = isUser ? 'bg-[#3a2d24]/30' : 'bg-[#8b0000]';
+            const name = isUser ? '탐정' : '조수';
+
             div.innerHTML = `
-                <div class="relative flex flex-col p-5 border-b border-[#3a2d24]/10 \${isUser ? 'bg-[#3a2d24]/5 italic' : ''}">
+                <div class="relative flex flex-col p-5 border-b border-[#3a2d24]/10 ` + bgColor + `">
                     <div class="flex items-center gap-3 mb-2">
-                        <div class="w-1.5 h-1.5 rounded-full \${isUser ? 'bg-[#3a2d24]/30' : 'bg-[#8b0000]'}"></div>
-                        <span class="text-[10px] font-black uppercase text-[#3a2d24]">\${isUser ? '탐정' : '조수'}</span>
+                        <div class="w-1.5 h-1.5 rounded-full ` + dotColor + `"></div>
+                        <span class="text-[10px] font-black uppercase text-[#3a2d24]">` + name + `</span>
                     </div>
-                    <p class="text-base md:text-lg leading-relaxed whitespace-pre-wrap">\${text}</p>
+                    <p class="text-base md:text-lg leading-relaxed whitespace-pre-wrap">` + text + `</p>
                 </div>`;
             return div;
         }
@@ -116,7 +118,7 @@
             typingIndicator.classList.add('flex');
 
             try {
-                // 3. Vercel 서버리스 API 호출 (/api/chat)
+                // 3. Vercel 서버리스 API 호출
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -126,13 +128,13 @@
                 const data = await response.json();
 
                 if (!response.ok) {
-                    throw new Error(data.error?.message || data.error || `Error \${response.status}`);
+                    throw new Error(data.error?.message || data.error || "응답 실패");
                 }
 
                 // 4. 조수 메시지 추가
                 chatContainer.appendChild(createMsg('assistant', data.text));
             } catch (e) {
-                chatContainer.appendChild(createMsg('assistant', `[통신 장애] \${e.message}\\n서버가 아직 준비 중이거나 환경 변수가 설정되지 않았을 수 있습니다.`));
+                chatContainer.appendChild(createMsg('assistant', "[통신 장애] " + e.message + "\n서버 배포가 완료될 때까지 잠시만 기다려 보십시오."));
             } finally {
                 typingIndicator.classList.add('hidden');
                 typingIndicator.classList.remove('flex');
