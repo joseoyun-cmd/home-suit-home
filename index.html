@@ -28,12 +28,9 @@
                 
                 <div class="px-6 py-4 border-b border-[#3a2d24]/20 flex justify-between items-center z-10 bg-[#e8dcc4]/80 backdrop-blur-md">
                     <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 bg-[#8b0000] rounded-full animate-pulse"></div>
+                        <div class="w-2.5 h-2.5 bg-[#8b0000] rounded-full animate-pulse shadow-[0_0_8px_#8b0000]"></div>
                         <h1 class="text-lg md:text-xl font-black uppercase tracking-[0.2em] text-[#3a2d24]">Home Suit Home</h1>
                     </div>
-                    <button id="config-btn" class="p-2 text-[#3a2d24]/50 hover:text-[#8b0000]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                    </button>
                 </div>
 
                 <div id="chat-container" class="flex-1 overflow-y-auto p-4 md:p-10 space-y-6 scrollbar-vintage z-0">
@@ -44,53 +41,28 @@
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#8b0000]"></div>
                                 <span class="text-[12px] font-black uppercase tracking-widest text-[#3a2d24]">조수</span>
                             </div>
-                            <p class="text-[#2a221b] text-lg leading-relaxed font-medium">친애하는 탐정님, 장원에 오신 것을 환영합니다. 조사가 필요하시면 언제든 말씀하십시오.</p>
+                            <p class="text-[#2a221b] text-lg leading-relaxed font-medium">탐정님, 본부와의 통신망을 다시 재설정했습니다. 단서를 말씀해 주십시오.</p>
                         </div>
                     </div>
                 </div>
 
                 <div id="typing-indicator" class="hidden px-8 py-4 italic text-sm text-[#3a2d24]/50 animate-pulse flex items-center gap-2">
                     <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    조수가 기록 보관함을 확인 중...
+                    본부와 암호 통신 중...
                 </div>
 
                 <div class="p-4 md:p-6 bg-[#b5a285]/20 border-t border-[#3a2d24]/15">
                     <div class="max-w-4xl mx-auto flex items-center gap-2 md:gap-4 bg-[#e8dcc4] border-2 border-[#3a2d24] p-1 shadow-[4px_4px_0px_#3a2d24] transition-all">
-                        <input type="text" id="user-input" placeholder="단서를 입력하십시오..." class="flex-1 bg-transparent p-2 md:p-3 outline-none text-base md:text-lg text-[#2a221b]">
-                        <button id="send-btn" class="bg-[#3a2d24] text-[#e8dcc4] px-4 md:px-6 py-2 md:py-3 font-bold uppercase text-[10px] md:text-xs hover:bg-[#1a1410]">Transmit</button>
+                        <input type="text" id="user-input" placeholder="단서를 입력하십시오..." class="flex-1 bg-transparent p-2 md:p-3 outline-none text-base md:text-lg text-[#2a221b]" autocomplete="off">
+                        <button id="send-btn" class="bg-[#3a2d24] text-[#e8dcc4] px-4 md:px-6 py-2 md:py-3 font-bold uppercase hover:bg-[#1a1410] transition-colors">Transmit</button>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Config Modal -->
-        <div id="config-modal" class="hidden fixed inset-0 z-50 bg-[#1a1410]/90 flex items-center justify-center p-4">
-            <div class="bg-[#d2c1a8] w-full max-w-lg border-4 border-[#3a2d24] p-6 shadow-2xl">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-black uppercase text-[#3a2d24]">Agency Config</h2>
-                    <button id="close-modal" class="text-[#3a2d24]">✕</button>
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <label class="text-[10px] font-black text-[#8b0000] uppercase block mb-1">Persona</label>
-                        <textarea id="system-prompt" class="w-full h-24 bg-white/40 border border-[#3a2d24] p-3 text-sm outline-none font-sans"></textarea>
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-black text-[#8b0000] uppercase block mb-1">Knowledge</label>
-                        <textarea id="knowledge-base" class="w-full h-32 bg-white/40 border border-[#3a2d24] p-3 text-sm outline-none font-sans"></textarea>
-                    </div>
-                    <button id="save-config" class="w-full bg-[#3a2d24] text-[#d2c1a8] py-3 font-bold">Apply Changes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let messages = [];
-        let systemPrompt = "당신은 'HOME SUIT HOME'의 조수입니다. 1920년대 말투를 쓰며 한국 부동산 임대차 법률 전문가입니다.";
-        let knowledgeBase = "전세사기, 대항력, 확정일자 등.";
         const apiKey = "AIzaSyAcIisPQHdKrNYx0T13ADC38h64ntWY7qM"; 
-
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const sendBtn = document.getElementById('send-btn');
@@ -111,31 +83,28 @@
         }
 
         async function fetchAI(text) {
-            // v1 정식 엔드포인트와 명확한 모델 이름 사용
-            const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            // v1beta 엔드포인트가 가장 수용 범위가 넓음
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             
-            // 시스템 프롬프트와 지식을 하나로 합쳐서 전달 (v1 API 최적화)
-            const fullPrompt = `${systemPrompt}\n\n배경지식: ${knowledgeBase}\n\n사용자 질문: ${text}`;
-
             const payload = {
                 contents: [{
-                    parts: [{ text: fullPrompt }]
+                    parts: [{ text: "당신은 1920년대 말투를 쓰는 부동산 법률 전문가 조수입니다. 다음 질문에 답하세요: " + text }]
                 }]
             };
 
-            const res = await fetch(url, {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
-            if (!res.ok) {
-                const err = await res.json();
-                throw new Error(err.error?.message || `Error ${res.status}`);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || `HTTP ${response.status}`);
             }
 
-            const data = await res.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text || "답변을 가져오지 못했습니다.";
+            const data = await response.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "기록을 읽어올 수 없습니다.";
         }
 
         async function handleSend() {
@@ -153,7 +122,7 @@
                 const response = await fetchAI(text);
                 chatContainer.appendChild(createMsg('assistant', response));
             } catch (e) {
-                chatContainer.appendChild(createMsg('assistant', `[오류 발생] 사유: ${e.message}`));
+                chatContainer.appendChild(createMsg('assistant', `[통신 오류] ${e.message}\nAPI 키가 해당 모델(gemini-1.5-flash)에 접근 권한이 있는지 확인이 필요합니다.`));
             } finally {
                 typingIndicator.classList.add('hidden');
                 typingIndicator.classList.remove('flex');
@@ -163,14 +132,6 @@
 
         sendBtn.addEventListener('click', handleSend);
         userInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') handleSend(); });
-
-        document.getElementById('config-btn').onclick = () => document.getElementById('config-modal').classList.remove('hidden');
-        document.getElementById('close-modal').onclick = () => document.getElementById('config-modal').classList.add('hidden');
-        document.getElementById('save-config').onclick = () => {
-            systemPrompt = document.getElementById('system-prompt').value;
-            knowledgeBase = document.getElementById('knowledge-base').value;
-            document.getElementById('config-modal').classList.add('hidden');
-        };
     </script>
 </body>
 </html>
